@@ -1,0 +1,43 @@
+{
+  "name": "teamboom-backend",
+  "version": "1.0.0",
+  "description": "server stuff",
+  "main": "server.js",
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "npm run mocha",
+    "mocha": "mocha --recursive",
+    "test:dev": "nodemon --exec 'npm run mocha'",
+    "test:unit": "nodemon --exec 'npm run mocha -- ./test/unit'",
+    "test:e2e": "nodemon --exec 'npm run mocha -- ./test/e2e'",
+    "start": "node server.js",
+    "start:dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-Boom/backend.git"
+  },
+  "keywords": [],
+  "authors": "Jen Lipton, Tasha Zuniga, Ryan Manro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Team-Boom/backend/issues"
+  },
+  "homepage": "https://github.com/Team-Boom/backend#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.8.0",
+    "mocha": "^4.0.0",
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jsonwebtoken-promisified": "^1.0.3",
+    "mongoose": "^4.12.3",
+    "morgan": "^1.9.0"
+  }
+}
