@@ -7,7 +7,7 @@ describe('Reviews e2e', () => {
     let _id = null;
     let reviewId = null;
 
-    const review1 = {
+    let review1 = {
         movieId: '555534465463',
         text: 'A great review',
         category: 'Sound',
@@ -66,6 +66,17 @@ describe('Reviews e2e', () => {
             .get(`/api/reviews/user/${_id}`)
             .then(({ body }) => {
                 assert.deepEqual(body[0], { ...review1, __v: 0, _id: reviewId });
+            });
+    });
+
+    it('Updates a Review', () => {
+        review1.text = 'A even greater review';
+        return request
+            .put(`/api/reviews/user/${reviewId}`)
+            .send(review1)
+            .then(checkOk)
+            .then(({ body }) => {
+                assert.deepEqual(body, {...review1, __v: 0, _id: reviewId });
             });
     });
 });

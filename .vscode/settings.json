@@ -3,8 +3,10 @@
     "boommovies",
     "imdb",
     "promisified",
+    "run",
     "signin",
     "signup",
+    "validators",
     "watchlist"
   ]
 }

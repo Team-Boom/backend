@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-describe('User e2e', () => {
+describe.skip('User e2e', () => {
 
     beforeEach(() => dropCollection('users'));
 
