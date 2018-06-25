@@ -42,13 +42,9 @@ describe('Reviews e2e', () => {
             .post(`/api/reviews/user/${_id}`)
             .send(review1)
             .then(checkOk)
-            .then(() => {
-                return request
-                    .get(`/api/reviews/movie/${review1.movieId}`)
-                    .then(({ body }) => {
-                        reviewId = body[0]._id;
-                        assert.equal(body[0].movieId, review1.movieId);
-                    });
+            .then(({ body }) => {
+                assert.deepEqual(body, {...review1, __v: 0, _id: body._id});
+                reviewId = body._id;
             });
     });
 
@@ -77,6 +73,15 @@ describe('Reviews e2e', () => {
             .then(checkOk)
             .then(({ body }) => {
                 assert.deepEqual(body, {...review1, __v: 0, _id: reviewId });
+            });
+    });
+
+    it('Deletes a Review', () => {
+        return request
+            .delete(`/api/reviews/user/${reviewId}`)
+            .then(checkOk)
+            .then(({ body }) => {
+                assert.equal(body, reviewId);
             });
     });
 });
