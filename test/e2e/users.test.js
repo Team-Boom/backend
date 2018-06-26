@@ -28,7 +28,7 @@ describe.only('User e2e', () => {
 
     it('Updates User Info', () => {
         return request
-            .put(`/api/user/${_id}/update`)
+            .put(`/api/users/${_id}`)
             .send({
                 name: 'Mrs. Foosball'
             })
