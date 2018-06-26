@@ -2,12 +2,23 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-describe('Reviews e2e', () => {
+describe.only('Reviews e2e', () => {
 
     let _id = null;
     let reviewId = null;
 
     let review1 = {
+        movieId: '555534465463',
+        text: 'A great review',
+        category: 'Sound',
+        rating: 3,
+        user: null,
+        title: 'Great Movie',
+        description: 'Movie description',
+        poster: 'url goes here'
+    };
+
+    let reviewBack = {
         movieId: '555534465463',
         text: 'A great review',
         category: 'Sound',
@@ -34,6 +45,7 @@ describe('Reviews e2e', () => {
                 // token = body.token;
                 _id = body._id;
                 review1.user = _id;
+                reviewBack.user = _id;
             });
     });
 
@@ -43,7 +55,7 @@ describe('Reviews e2e', () => {
             .send(review1)
             .then(checkOk)
             .then(({ body }) => {
-                assert.deepEqual(body, {...review1, __v: 0, _id: body._id});
+                assert.deepEqual(body, {...reviewBack, __v: 0, _id: body._id});
                 reviewId = body._id;
             });
     });
@@ -61,18 +73,18 @@ describe('Reviews e2e', () => {
         return request
             .get(`/api/reviews/user/${_id}`)
             .then(({ body }) => {
-                assert.deepEqual(body[0], { ...review1, __v: 0, _id: reviewId });
+                assert.deepEqual(body[0], { ...reviewBack, __v: 0, _id: reviewId });
             });
     });
 
     it('Updates a Review', () => {
-        review1.text = 'A even greater review';
+        reviewBack.text = 'A even greater review';
         return request
             .put(`/api/reviews/user/${reviewId}`)
-            .send(review1)
+            .send(reviewBack)
             .then(checkOk)
             .then(({ body }) => {
-                assert.deepEqual(body, {...review1, __v: 0, _id: reviewId });
+                assert.deepEqual(body, {...reviewBack, __v: 0, _id: reviewId });
             });
     });
 
