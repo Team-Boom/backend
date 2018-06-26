@@ -2,11 +2,10 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-describe.skip('User e2e', () => {
+describe.only('User e2e', () => {
 
     beforeEach(() => dropCollection('users'));
 
-    let token = null;
     let _id = null;
 
     const checkOk = res => {
@@ -23,7 +22,6 @@ describe.skip('User e2e', () => {
                 name: 'Mr. Foo Bar'
             })
             .then(({ body }) => {
-                token = body.token;
                 _id = body._id;
             });
     });
@@ -36,7 +34,7 @@ describe.skip('User e2e', () => {
             })
             .then(checkOk)
             .then(({ body }) => {
-                assert.deepEqual(body, { updated: true});
+                assert.deepEqual(body, { ...body, name: 'Mrs. Foosball' });
             });
     });
 
