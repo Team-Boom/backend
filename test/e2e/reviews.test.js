@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-describe.only('Reviews e2e', () => {
+describe.skip('Reviews e2e', () => {
 
     let _id = null;
     let reviewId = null;

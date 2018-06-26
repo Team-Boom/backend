@@ -3,7 +3,7 @@ const { Types } = require('mongoose');
 const { getErrors } = require('./helpers');
 const Review = require('../../lib/models/Review');
 
-describe('Review Model', () => {
+describe.skip('Review Model', () => {
 
     const data = {
         user: Types.ObjectId(),
