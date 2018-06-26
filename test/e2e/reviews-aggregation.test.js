@@ -1,11 +1,141 @@
-// const { assert } = require('chai');
-// const Review = require('../../lib/models/Review');
+const { assert } = require('chai');
+const request = require('./request');
+const { dropCollection } = require('./db');
 
-describe.skip('Aggregation', () => {
+const { 
+    review1,
+    review2,
+    review3,
+    review4,
+    review5,
+    review6,
+    review7
+} = require('./staticReviewData');
+let {
+    user1,
+    user2,
+    user3,
+    user4,
+    user5,
+    user6,
+    user7
+} = require('./staticUserData');
 
+describe.only('Aggregation', () => {
 
-    it('Load Top 10 Movies by Category', () => {
+    let userIds = [];
 
+    before(() => dropCollection('users'));
+    before(() => dropCollection('reviews'));
+
+    const postUser = user => {
+        return request.post('/api/auth/signup')
+            .send(user)
+            .then(({ body }) => {
+                userIds.push(body._id);
+            });
+    };
+
+    const checkOk = res => {
+        if(!res.ok) throw res.error;
+        return res;
+    };
+
+    const postReview = (review, user) => {
+        return request
+            .post(`/api/reviews/user/${user}`)
+            .send(review)
+            .then(checkOk)
+            .then(() => {return null;});
+    };
+
+    before(() => postUser(user1));
+    before(() => postUser(user2));
+    before(() => postUser(user3));
+    before(() => postUser(user4));
+    before(() => postUser(user5));
+    before(() => postUser(user6));
+    before(() => postUser(user7));
+
+    before(() => postReview(review1[0], userIds[0]));
+    before(() => postReview(review1[1], userIds[0]));
+    before(() => postReview(review1[2], userIds[0]));
+    before(() => postReview(review1[3], userIds[0]));
+    before(() => postReview(review1[4], userIds[0]));
+    before(() => postReview(review1[5], userIds[0]));
+    before(() => postReview(review1[6], userIds[0]));
+    before(() => postReview(review1[7], userIds[0]));
+    before(() => postReview(review1[8], userIds[0]));
+    before(() => postReview(review1[9], userIds[0]));
+
+    before(() => postReview(review2[0], userIds[1]));
+    before(() => postReview(review2[1], userIds[1]));
+    before(() => postReview(review2[2], userIds[1]));
+    before(() => postReview(review2[3], userIds[1]));
+    before(() => postReview(review2[4], userIds[1]));
+    before(() => postReview(review2[5], userIds[1]));
+    before(() => postReview(review2[6], userIds[1]));
+    before(() => postReview(review2[7], userIds[1]));
+    before(() => postReview(review2[8], userIds[1]));
+    before(() => postReview(review2[9], userIds[1]));
+
+    before(() => postReview(review3[0], userIds[2]));
+    before(() => postReview(review3[1], userIds[2]));
+    before(() => postReview(review3[2], userIds[2]));
+    before(() => postReview(review3[3], userIds[2]));
+    before(() => postReview(review3[4], userIds[2]));
+    before(() => postReview(review3[5], userIds[2]));
+    before(() => postReview(review3[6], userIds[2]));
+    before(() => postReview(review3[7], userIds[2]));
+    before(() => postReview(review3[8], userIds[2]));
+    before(() => postReview(review3[9], userIds[2]));
+
+    before(() => postReview(review4[0], userIds[3]));
+    before(() => postReview(review4[1], userIds[3]));
+    before(() => postReview(review4[2], userIds[3]));
+    before(() => postReview(review4[3], userIds[3]));
+    before(() => postReview(review4[4], userIds[3]));
+    before(() => postReview(review4[5], userIds[3]));
+    before(() => postReview(review4[6], userIds[3]));
+    before(() => postReview(review4[7], userIds[3]));
+    before(() => postReview(review4[8], userIds[3]));
+    before(() => postReview(review4[9], userIds[3]));
+
+    before(() => postReview(review5[0], userIds[4]));
+    before(() => postReview(review5[1], userIds[4]));
+    before(() => postReview(review5[2], userIds[4]));
+    before(() => postReview(review5[3], userIds[4]));
+    before(() => postReview(review5[4], userIds[4]));
+    before(() => postReview(review5[5], userIds[4]));
+    before(() => postReview(review5[6], userIds[4]));
+    before(() => postReview(review5[7], userIds[4]));
+    before(() => postReview(review5[8], userIds[4]));
+    before(() => postReview(review5[9], userIds[4]));
+
+    before(() => postReview(review6[0], userIds[5]));
+    before(() => postReview(review6[1], userIds[5]));
+    before(() => postReview(review6[2], userIds[5]));
+    before(() => postReview(review6[3], userIds[5]));
+    before(() => postReview(review6[4], userIds[5]));
+    before(() => postReview(review6[5], userIds[5]));
+    before(() => postReview(review6[6], userIds[5]));
+    before(() => postReview(review6[7], userIds[5]));
+    before(() => postReview(review6[8], userIds[5]));
+    before(() => postReview(review6[9], userIds[5]));
+
+    before(() => postReview(review7[0], userIds[6]));
+    before(() => postReview(review7[1], userIds[6]));
+    before(() => postReview(review7[2], userIds[6]));
+    before(() => postReview(review7[3], userIds[6]));
+    before(() => postReview(review7[4], userIds[6]));
+    
+
+    it('Avg Ratings by MovieId', () => {
+        return request
+            .get(`/api/reviews/${review1[0].movieId}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, { Lighting: 5, Editing: 0, Cinematography: 2, Design: 3, Sound: 3 });
+            });
     });
 
 });

@@ -1,479 +1,544 @@
-const staticReviews1 = [
+const review1 = [
     {
         movieId: '555534465461',
         text: '1A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465462',
         text: '2A great review',
         category: 'Sound',
         rating: 4,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465463',
         text: '3A great review',
         category: 'Sound',
         rating: 5,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465464',
         text: '4A great review',
         category: 'Sound',
         rating: 2,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465465',
         text: '5A great review',
         category: 'Sound',
         rating: 1,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465466',
         text: '6A great review',
         category: 'Sound',
         rating: 0,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465467',
         text: '7A great review',
         category: 'Sound',
         rating: 4,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465468',
         text: '8A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465469',
         text: '9A great review',
         category: 'Sound',
         rating: 5,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465460',
         text: '10A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     }];
 
-const staticReviews2 = [
+const review2 = [
     {
         movieId: '555534465461',
         text: 'A Review',
         category: 'Cinematography',
         rating: 2,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465462',
         text: 'A Review',
         category: 'Cinematography',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465463',
         text: 'A Review',
         category: 'Cinematography',
         rating: 1,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465464',
         text: 'A Review',
         category: 'Cinematography',
         rating: 5,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465465',
         text: 'A Review',
         category: 'Cinematography',
         rating: 4,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465466',
         text: 'A Review',
         category: 'Cinematography',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465467',
         text: 'A Review',
         category: 'Cinematography',
         rating: 2,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465468',
         text: 'A Review',
         category: 'Cinematography',
         rating: 4,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465469',
         text: 'A Review',
         category: 'Cinematography',
         rating: 1,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465460',
         text: 'A Review',
         category: 'Cinematography',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     }];
 
-const staticReviews3 = [
+const review3 = [
     {
         movieId: '555534465461',
         text: 'A great review',
         category: 'Editing',
         rating: 0,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465462',
         text: 'A great review',
         category: 'Editing',
         rating: 1,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465463',
         text: 'A great review',
         category: 'Editing',
         rating: 2,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465464',
         text: 'A great review',
         category: 'Editing',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465465',
         text: 'A great review',
         category: 'Editing',
         rating: 4,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465466',
         text: 'A great review',
         category: 'Editing',
         rating: 5,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465467',
         text: 'A great review',
         category: 'Editing',
         rating: 0,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465468',
         text: 'A great review',
         category: 'Editing',
         rating: 1,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465469',
         text: 'A great review',
         category: 'Editing',
         rating: 2,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465460',
         text: 'A great review',
         category: 'Editing',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     }];
 
-const staticReviews4 = [
+const review4 = [
     {
         movieId: '555534465461',
         text: 'A great review',
         category: 'Design',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465462',
         text: 'A great review',
         category: 'Design',
         rating: 2,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465463',
         text: 'A great review',
         category: 'Design',
         rating: 1,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465464',
         text: 'A great review',
         category: 'Design',
         rating: 0,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465465',
         text: 'A great review',
         category: 'Design',
         rating: 1,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465466',
         text: 'A great review',
         category: 'Design',
         rating: 2,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465467',
         text: 'A great review',
         category: 'Design',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465468',
         text: 'A great review',
         category: 'Design',
         rating: 4,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465469',
         text: 'A great review',
         category: 'Design',
         rating: 5,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465460',
         text: 'A great review',
         category: 'Design',
         rating: 4,
-        user: null
+        user: null,
+        title: 'Great Title'
     }];
 
-const staticReviews5 = [
+const review5 = [
     {
         movieId: '555534465461',
         text: 'A great review',
         category: 'Lighting',
         rating: 5,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465462',
         text: 'A great review',
         category: 'Lighting',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465463',
         text: 'A great review',
         category: 'Lighting',
         rating: 2,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465464',
         text: 'A great review',
         category: 'Lighting',
         rating: 0,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465465',
         text: 'A great review',
         category: 'Lighting',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465466',
         text: 'A great review',
         category: 'Lighting',
         rating: 2,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465467',
         text: 'A great review',
         category: 'Lighting',
         rating: 4,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465468',
         text: 'A great review',
         category: 'Lighting',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465469',
         text: 'A great review',
         category: 'Lighting',
         rating: 1,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465460',
         text: 'A great review',
         category: 'Lighting',
         rating: 5,
-        user: null
+        user: null,
+        title: 'Great Title'
     }];
 
-const staticReviews6 = [
+const review6 = [
     {
         movieId: '555534465461',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465462',
         text: 'A great review',
         category: 'Lighting',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465463',
         text: 'A great review',
         category: 'Editing',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465464',
         text: 'A great review',
         category: 'Design',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465465',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465466',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465467',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465468',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465469',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465460',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     }];
 
-const staticReviews7 = [
+const review7 = [
     {
         movieId: '555534465461',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465462',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465463',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465464',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
     {
         movieId: '555534465465',
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Title'
     },
 ];
 
 module.exports = { 
-    staticReviews1,
-    staticReviews2,
-    staticReviews3,
-    staticReviews4,
-    staticReviews5,
-    staticReviews6,
-    staticReviews7
+    review1,
+    review2,
+    review3,
+    review4,
+    review5,
+    review6,
+    review7
 };
