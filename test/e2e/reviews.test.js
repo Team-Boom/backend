@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-describe.skip('Reviews e2e', () => {
+describe.only('Reviews e2e', () => {
 
     let _id = null;
     let reviewId = null;
@@ -23,7 +23,8 @@ describe.skip('Reviews e2e', () => {
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Movie'
     };
 
     const checkOk = res => {
@@ -42,7 +43,6 @@ describe.skip('Reviews e2e', () => {
                 name: 'Mr. Foo Bar'
             })
             .then(({ body }) => {
-                // token = body.token;
                 _id = body._id;
                 review1.user = _id;
                 reviewBack.user = _id;
@@ -55,7 +55,7 @@ describe.skip('Reviews e2e', () => {
             .send(review1)
             .then(checkOk)
             .then(({ body }) => {
-                assert.deepEqual(body, {...reviewBack, __v: 0, _id: body._id});
+                assert.deepEqual(body, {...reviewBack, __v: 0, _id: body._id });
                 reviewId = body._id;
             });
     });
@@ -94,6 +94,14 @@ describe.skip('Reviews e2e', () => {
             .then(checkOk)
             .then(({ body }) => {
                 assert.equal(body, reviewId);
+            });
+    });
+
+    it('Tries to get reviews, but none by that movieId', () => {
+        return request
+            .get('/api/reviews/movie/badId')
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
             });
     });
 });
