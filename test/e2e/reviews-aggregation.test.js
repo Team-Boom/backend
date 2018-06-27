@@ -22,7 +22,7 @@ let {
     user8
 } = require('./staticUserData');
 
-describe('Aggregation', () => {
+describe.only('Aggregation', () => {
 
     let userIds = [];
 

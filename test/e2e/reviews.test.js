@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-describe.only('Reviews e2e', () => {
+describe('Reviews e2e', () => {
 
     let _id = null;
     let _id2 = null;
@@ -94,6 +94,14 @@ describe.only('Reviews e2e', () => {
     it('Results back from no reviews by User', () => {
         return request
             .get(`/api/reviews/user/${_id2}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
+
+    it('Response for bad userId for reviews', () => {
+        return request
+            .get('/api/reviews/user/555555555555555555555555')
             .then(({ body }) => {
                 assert.deepEqual(body, []);
             });
