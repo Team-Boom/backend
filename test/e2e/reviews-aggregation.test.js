@@ -138,4 +138,23 @@ describe.only('Aggregation', () => {
             });
     });
 
+    it('Load all Top 10s by Category', () => {
+        return request
+            .get('/api/reviews/top10')
+            .then(({ body }) => {
+                assert.isObject(body);
+                assert.isArray(body.cinematography);
+                assert.isArray(body.editing);
+                assert.isArray(body.sound);
+                assert.isArray(body.design);
+                assert.isArray(body.lighting);
+                assert.lengthOf(body.editing, 10);
+                assert.lengthOf(body.cinematography, 10);
+                assert.lengthOf(body.sound, 10);
+                assert.lengthOf(body.design, 10);
+                assert.lengthOf(body.lighting, 10);
+                assert.isObject(body.editing[0]);
+            });
+    });
+
 });
