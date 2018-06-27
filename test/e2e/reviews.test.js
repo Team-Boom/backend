@@ -16,7 +16,8 @@ describe('Reviews e2e', () => {
         user: null,
         title: 'Great Movie',
         description: 'Movie description',
-        poster: 'url goes here'
+        poster: 'url goes here',
+        userName: null
     };
 
     let reviewBack = {
@@ -25,7 +26,8 @@ describe('Reviews e2e', () => {
         category: 'Sound',
         rating: 3,
         user: null,
-        title: 'Great Movie'
+        title: 'Great Movie',
+        userName: null
     };
 
     const checkOk = res => {
@@ -46,7 +48,9 @@ describe('Reviews e2e', () => {
             .then(({ body }) => {
                 _id = body._id;
                 review1.user = _id;
+                review1.userName = body.name;
                 reviewBack.user = _id;
+                reviewBack.userName = body.name;
             });
     });
 
