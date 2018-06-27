@@ -186,4 +186,20 @@ describe.only('Aggregation', () => {
             });
     });
 
+    it('Gets All Reviews for Category by Movie ID', () => {
+        return request
+            .get(`/api/reviews/movie/${review1[0].movieId}/Sound`)
+            .then(({ body }) => {
+                assert.equal(body.length, 3);
+            });
+    });
+
+    it('Attempts to get reviews by category for a movie that has none', () => {
+        return request
+            .get('/api/reviews/movie/5555/Editing')
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
+
 });
