@@ -128,7 +128,7 @@ describe.only('Aggregation', () => {
     before(() => postReview(review7[2], userIds[6]));
     before(() => postReview(review7[3], userIds[6]));
     before(() => postReview(review7[4], userIds[6]));
-    
+    before(() => postReview(review7[5], userIds[6]));
 
     it('Avg Ratings by MovieId', () => {
         return request
@@ -154,6 +154,17 @@ describe.only('Aggregation', () => {
                 assert.lengthOf(body.design, 10);
                 assert.lengthOf(body.lighting, 10);
                 assert.isObject(body.editing[0]);
+                assert.equal(body.editing[0].avgRating, 5.0);
+                assert.equal(body.editing[9].avgRating, 0.0);
+            });
+    });
+
+    it('Sort By Category', () => {
+        return request
+            .get('/api/reviews/sort/Sound/2')
+            .then(({ body }) => {
+                assert.lengthOf(body, 1);
+                assert.equal(body[0].avgRating, 1.5);
             });
     });
 

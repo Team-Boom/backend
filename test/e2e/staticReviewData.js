@@ -531,6 +531,14 @@ const review7 = [
         user: null,
         title: 'Great Title'
     },
+    {
+        movieId: '5555',
+        text: 'A great review for paging',
+        category: 'Sound',
+        rating: 5,
+        user: null,
+        title: 'Great Paging Title'
+    }
 ];
 
 module.exports = { 
