@@ -5,6 +5,7 @@ const { dropCollection } = require('./db');
 describe.only('Reviews e2e', () => {
 
     let _id = null;
+    let _id2 = null;
     let reviewId = null;
 
     let review1 = {
@@ -49,6 +50,19 @@ describe.only('Reviews e2e', () => {
             });
     });
 
+    before(() => {
+        return request
+            .post('/api/auth/signup')
+            .send({
+                email: 'noreviews@bar.com',
+                password: 'foobar',
+                name: 'Mr. No Reviews'
+            })
+            .then(({ body }) => {
+                _id2 = body._id;
+            });
+    });
+
     it('Posts a Review', () => {
         return request
             .post(`/api/reviews/user/${_id}`)
@@ -74,6 +88,14 @@ describe.only('Reviews e2e', () => {
             .get(`/api/reviews/user/${_id}`)
             .then(({ body }) => {
                 assert.deepEqual(body[0], { ...reviewBack, __v: 0, _id: reviewId });
+            });
+    });
+
+    it('Results back from no reviews by User', () => {
+        return request
+            .get(`/api/reviews/user/${_id2}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
             });
     });
 
