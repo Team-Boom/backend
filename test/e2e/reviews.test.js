@@ -2,9 +2,10 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-describe.skip('Reviews e2e', () => {
+describe('Reviews e2e', () => {
 
     let _id = null;
+    let _id2 = null;
     let reviewId = null;
 
     let review1 = {
@@ -23,7 +24,8 @@ describe.skip('Reviews e2e', () => {
         text: 'A great review',
         category: 'Sound',
         rating: 3,
-        user: null
+        user: null,
+        title: 'Great Movie'
     };
 
     const checkOk = res => {
@@ -42,10 +44,22 @@ describe.skip('Reviews e2e', () => {
                 name: 'Mr. Foo Bar'
             })
             .then(({ body }) => {
-                // token = body.token;
                 _id = body._id;
                 review1.user = _id;
                 reviewBack.user = _id;
+            });
+    });
+
+    before(() => {
+        return request
+            .post('/api/auth/signup')
+            .send({
+                email: 'noreviews@bar.com',
+                password: 'foobar',
+                name: 'Mr. No Reviews'
+            })
+            .then(({ body }) => {
+                _id2 = body._id;
             });
     });
 
@@ -55,7 +69,7 @@ describe.skip('Reviews e2e', () => {
             .send(review1)
             .then(checkOk)
             .then(({ body }) => {
-                assert.deepEqual(body, {...reviewBack, __v: 0, _id: body._id});
+                assert.deepEqual(body, {...reviewBack, __v: 0, _id: body._id });
                 reviewId = body._id;
             });
     });
@@ -77,6 +91,22 @@ describe.skip('Reviews e2e', () => {
             });
     });
 
+    it('Results back from no reviews by User', () => {
+        return request
+            .get(`/api/reviews/user/${_id2}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
+
+    it('Response for bad userId for reviews', () => {
+        return request
+            .get('/api/reviews/user/555555555555555555555555')
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
+
     it('Updates a Review', () => {
         reviewBack.text = 'A even greater review';
         return request
@@ -94,6 +124,14 @@ describe.skip('Reviews e2e', () => {
             .then(checkOk)
             .then(({ body }) => {
                 assert.equal(body, reviewId);
+            });
+    });
+
+    it('Tries to get reviews, but none by that movieId', () => {
+        return request
+            .get('/api/reviews/movie/badId')
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
             });
     });
 });

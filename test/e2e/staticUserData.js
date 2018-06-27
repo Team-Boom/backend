@@ -40,6 +40,12 @@ let user7 = {
     name: 'Mr. Foo Bar'
 };
 
+let user8 = {
+    email: 'noreview@bar.com',
+    password: 'foobar',
+    name: 'Mr. No Review'
+};
+
 module.exports = {
     user1,
     user2,
@@ -47,5 +53,6 @@ module.exports = {
     user4,
     user5,
     user6,
-    user7
+    user7,
+    user8
 };

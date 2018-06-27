@@ -18,7 +18,8 @@ let {
     user4,
     user5,
     user6,
-    user7
+    user7,
+    user8
 } = require('./staticUserData');
 
 describe.only('Aggregation', () => {
@@ -56,6 +57,7 @@ describe.only('Aggregation', () => {
     before(() => postUser(user5));
     before(() => postUser(user6));
     before(() => postUser(user7));
+    before(() => postUser(user8));
 
     before(() => postReview(review1[0], userIds[0]));
     before(() => postReview(review1[1], userIds[0]));
@@ -165,6 +167,22 @@ describe.only('Aggregation', () => {
             .then(({ body }) => {
                 assert.lengthOf(body, 1);
                 assert.equal(body[0].avgRating, 1.5);
+            });
+    });
+
+    it('Gets average rating by User', () => {
+        return request
+            .get(`/api/reviews/user/avg/${userIds[0]}`)
+            .then(({ body }) => {
+                assert.equal(body.avgRating, 3.0);
+            });
+    });
+
+    it('Response from zero reviews', () => {
+        return request
+            .get(`/api/reviews/user/avg/${userIds[7]}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, {});
             });
     });
 
