@@ -168,4 +168,13 @@ describe.only('Aggregation', () => {
             });
     });
 
+    it('Gets average rating by User', () => {
+        return request
+            .get(`/api/reviews/user/avg/${userIds[0]}`)
+            .then(({ body }) => {
+                console.log(body);
+                assert.equal(body.avgRating, 3.0);
+            });
+    });
+
 });
