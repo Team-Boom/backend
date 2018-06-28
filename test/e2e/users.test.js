@@ -1,19 +1,29 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
+const Movie = require('../../lib/models/Movie');
 
-describe('User e2e', () => {
 
-    beforeEach(() => dropCollection('users'));
+describe.only('User e2e', () => {
+
+    before(() => dropCollection('users'));
+    before(() => dropCollection('movies'));
 
     let _id = null;
+
+    const movie = {
+        title: 'The Best Movie to Add',
+        poster: 'url goes here',
+        description: 'oh yeah',
+        movieId: '12345'
+    };
 
     const checkOk = res => {
         if(!res.ok) throw res.error;
         return res;
     };
 
-    beforeEach(() => {
+    before(() => {
         return request
             .post('/api/auth/signup')
             .send({
@@ -37,5 +47,22 @@ describe('User e2e', () => {
                 assert.deepEqual(body, { ...body, name: 'Mrs. Foosball' });
             });
     });
+
+    it('Adds movie to watchlist and adds movie to database', () => {
+        const { movieId } = movie;
+        return request
+            .post(`/api/users/${_id}/watchlist`)
+            .send(movie)
+            .then(checkOk)
+            .then(({ body}) => {
+                assert.deepEqual(body.watchlist, [movieId]);
+            })
+            .then(() => Movie.exists({ movieId }))
+            .then(exists => {
+                assert.isTrue(exists);
+            });
+    });
+
+    
 
 });
