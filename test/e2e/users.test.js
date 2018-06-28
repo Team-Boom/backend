@@ -63,6 +63,12 @@ describe.only('User e2e', () => {
             });
     });
 
-    
+    it('Get watchlist', () => {
+        return request
+            .get(`/api/users/${_id}/watchlist`)
+            .then(({ body }) => {
+                assert.equal(body[0].movieId, '12345');
+            });
+    });
 
 });
