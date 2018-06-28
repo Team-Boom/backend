@@ -22,7 +22,7 @@ let {
     user8
 } = require('./staticUserData');
 
-describe('Aggregation', () => {
+describe.only('Aggregation', () => {
 
     let userIds = [];
 
@@ -199,6 +199,14 @@ describe('Aggregation', () => {
             .get('/api/reviews/movie/5555/Editing')
             .then(({ body }) => {
                 assert.deepEqual(body, []);
+            });
+    });
+
+    it('Counts number of reviews by user by category', () => {
+        return request
+            .get(`/api/reviews/user/count/${userIds[0]}/Sound`)
+            .then(body => {
+                assert.equal(body.text, 10);
             });
     });
 
