@@ -122,6 +122,14 @@ describe('Reviews e2e', () => {
             });
     });
 
+    it('Gets a review by Review ID', () => {
+        return request
+            .get(`/api/reviews/detail/${reviewId}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, {...reviewBack, __v: 0, _id: reviewId });
+            });
+    });
+
     it('Deletes a Review', () => {
         return request
             .delete(`/api/reviews/user/${reviewId}`)
@@ -138,4 +146,5 @@ describe('Reviews e2e', () => {
                 assert.deepEqual(body, []);
             });
     });
+
 });
