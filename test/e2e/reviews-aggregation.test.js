@@ -202,4 +202,12 @@ describe.only('Aggregation', () => {
             });
     });
 
+    it('Counts number of reviews by user by category', () => {
+        return request
+            .get(`/api/reviews/user/count/${userIds[0]}/Sound`)
+            .then(body => {
+                assert.equal(body.text, 10);
+            });
+    });
+
 });

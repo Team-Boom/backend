@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-describe.skip('User e2e', () => {
+describe('User e2e', () => {
 
     beforeEach(() => dropCollection('users'));
 
@@ -17,7 +17,7 @@ describe.skip('User e2e', () => {
         return request
             .post('/api/auth/signup')
             .send({
-                email: 'foo@bar.com',
+                email: 'email@email.com',
                 password: 'foobar',
                 name: 'Mr. Foo Bar'
             })

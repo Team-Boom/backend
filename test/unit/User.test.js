@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const { getErrors } = require('./helpers');
 const User = require('../../lib/models/User');
 
-describe.skip('User Model', () => {
+describe('User Model', () => {
 
     const data = {
         name: 'Foo Bar',
@@ -30,7 +30,6 @@ describe.skip('User Model', () => {
         data._id = user._id;
         data.hash = user.hash;
         data.date = user.date;
-        data.reviews = [];
         data.watchlist = [];
         assert.deepEqual(data, user.toJSON());
     });

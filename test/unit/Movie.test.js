@@ -3,7 +3,7 @@ const { assert } = require('chai');
 const { getErrors } = require('./helpers');
 const Movie = require('../../lib/models/Movie');
 
-describe.skip('Movie Model', () => {
+describe('Movie Model', () => {
 
     const data = {
         title: 'Great Movie Title',
