@@ -4,13 +4,14 @@ const { dropCollection } = require('./db');
 const Movie = require('../../lib/models/Movie');
 const { verify } = require('../../lib/auth/token-service');
 
-describe('User e2e', () => {
+describe.only('User e2e', () => {
 
     before(() => dropCollection('users'));
     before(() => dropCollection('movies'));
 
     let _id = null;
     let token = null;
+    let user = null;
 
     const movie = {
         title: 'The Best Movie to Add',
@@ -33,6 +34,7 @@ describe('User e2e', () => {
                 name: 'Mr. Foo Bar'
             })
             .then(({ body }) => {
+                user = body;
                 token = body.token;
                 return verify(body.token);
             })
@@ -62,6 +64,7 @@ describe('User e2e', () => {
             .send(movie)
             .then(checkOk)
             .then(({ body }) => {
+                user = body;
                 assert.deepEqual(body.watchlist, [movieId]);
             })
             .then(() => Movie.exists({ movieId }))
@@ -76,7 +79,7 @@ describe('User e2e', () => {
             .set('Authorization', token)
             .send(movie)
             .then(({ body }) => {
-                assert.equal(body.error, 'Movie Already in Watchlist!');
+                assert.deepEqual(body, user);
             });
     });
 
