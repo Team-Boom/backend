@@ -4,7 +4,7 @@ const { dropCollection } = require('./db');
 const Movie = require('../../lib/models/Movie');
 const { verify } = require('../../lib/auth/token-service');
 
-describe.only('User e2e', () => {
+describe('User e2e', () => {
 
     before(() => dropCollection('users'));
     before(() => dropCollection('movies'));
@@ -35,8 +35,8 @@ describe.only('User e2e', () => {
             .then(({ body }) => {
                 token = body.token;
                 return verify(body.token);
-            }).
-            then(payload => {
+            })
+            .then(payload => {
                 _id = payload.id;
             });
     });

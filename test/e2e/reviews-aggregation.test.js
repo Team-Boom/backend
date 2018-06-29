@@ -1,6 +1,7 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
+const { verify } = require('../../lib/auth/token-service');
 
 const { 
     review1,
@@ -25,6 +26,7 @@ let {
 describe('Aggregation', () => {
 
     let userIds = [];
+    let tokens =[];
 
     before(() => dropCollection('users'));
     before(() => dropCollection('reviews'));
@@ -33,7 +35,11 @@ describe('Aggregation', () => {
         return request.post('/api/auth/signup')
             .send(user)
             .then(({ body }) => {
-                userIds.push(body._id);
+                tokens.push(body.token);
+                return verify(body.token);
+            })
+            .then(payload => {
+                userIds.push(payload.id);
             });
     };
 
@@ -42,9 +48,10 @@ describe('Aggregation', () => {
         return res;
     };
 
-    const postReview = (review, user) => {
+    const postReview = (review, user, token) => {
         return request
             .post(`/api/reviews/user/${user}`)
+            .set('Authorization', token)
             .send(review)
             .then(checkOk)
             .then(() => {return null;});
@@ -59,78 +66,78 @@ describe('Aggregation', () => {
     before(() => postUser(user7));
     before(() => postUser(user8));
 
-    before(() => postReview(review1[0], userIds[0]));
-    before(() => postReview(review1[1], userIds[0]));
-    before(() => postReview(review1[2], userIds[0]));
-    before(() => postReview(review1[3], userIds[0]));
-    before(() => postReview(review1[4], userIds[0]));
-    before(() => postReview(review1[5], userIds[0]));
-    before(() => postReview(review1[6], userIds[0]));
-    before(() => postReview(review1[7], userIds[0]));
-    before(() => postReview(review1[8], userIds[0]));
-    before(() => postReview(review1[9], userIds[0]));
+    before(() => postReview(review1[0], userIds[0], tokens[0]));
+    before(() => postReview(review1[1], userIds[0], tokens[0]));
+    before(() => postReview(review1[2], userIds[0], tokens[0]));
+    before(() => postReview(review1[3], userIds[0], tokens[0]));
+    before(() => postReview(review1[4], userIds[0], tokens[0]));
+    before(() => postReview(review1[5], userIds[0], tokens[0]));
+    before(() => postReview(review1[6], userIds[0], tokens[0]));
+    before(() => postReview(review1[7], userIds[0], tokens[0]));
+    before(() => postReview(review1[8], userIds[0], tokens[0]));
+    before(() => postReview(review1[9], userIds[0], tokens[0]));
 
-    before(() => postReview(review2[0], userIds[1]));
-    before(() => postReview(review2[1], userIds[1]));
-    before(() => postReview(review2[2], userIds[1]));
-    before(() => postReview(review2[3], userIds[1]));
-    before(() => postReview(review2[4], userIds[1]));
-    before(() => postReview(review2[5], userIds[1]));
-    before(() => postReview(review2[6], userIds[1]));
-    before(() => postReview(review2[7], userIds[1]));
-    before(() => postReview(review2[8], userIds[1]));
-    before(() => postReview(review2[9], userIds[1]));
+    before(() => postReview(review2[0], userIds[1], tokens[1]));
+    before(() => postReview(review2[1], userIds[1], tokens[1]));
+    before(() => postReview(review2[2], userIds[1], tokens[1]));
+    before(() => postReview(review2[3], userIds[1], tokens[1]));
+    before(() => postReview(review2[4], userIds[1], tokens[1]));
+    before(() => postReview(review2[5], userIds[1], tokens[1]));
+    before(() => postReview(review2[6], userIds[1], tokens[1]));
+    before(() => postReview(review2[7], userIds[1], tokens[1]));
+    before(() => postReview(review2[8], userIds[1], tokens[1]));
+    before(() => postReview(review2[9], userIds[1], tokens[1]));
 
-    before(() => postReview(review3[0], userIds[2]));
-    before(() => postReview(review3[1], userIds[2]));
-    before(() => postReview(review3[2], userIds[2]));
-    before(() => postReview(review3[3], userIds[2]));
-    before(() => postReview(review3[4], userIds[2]));
-    before(() => postReview(review3[5], userIds[2]));
-    before(() => postReview(review3[6], userIds[2]));
-    before(() => postReview(review3[7], userIds[2]));
-    before(() => postReview(review3[8], userIds[2]));
-    before(() => postReview(review3[9], userIds[2]));
+    before(() => postReview(review3[0], userIds[2], tokens[2]));
+    before(() => postReview(review3[1], userIds[2], tokens[2]));
+    before(() => postReview(review3[2], userIds[2], tokens[2]));
+    before(() => postReview(review3[3], userIds[2], tokens[2]));
+    before(() => postReview(review3[4], userIds[2], tokens[2]));
+    before(() => postReview(review3[5], userIds[2], tokens[2]));
+    before(() => postReview(review3[6], userIds[2], tokens[2]));
+    before(() => postReview(review3[7], userIds[2], tokens[2]));
+    before(() => postReview(review3[8], userIds[2], tokens[2]));
+    before(() => postReview(review3[9], userIds[2], tokens[2]));
 
-    before(() => postReview(review4[0], userIds[3]));
-    before(() => postReview(review4[1], userIds[3]));
-    before(() => postReview(review4[2], userIds[3]));
-    before(() => postReview(review4[3], userIds[3]));
-    before(() => postReview(review4[4], userIds[3]));
-    before(() => postReview(review4[5], userIds[3]));
-    before(() => postReview(review4[6], userIds[3]));
-    before(() => postReview(review4[7], userIds[3]));
-    before(() => postReview(review4[8], userIds[3]));
-    before(() => postReview(review4[9], userIds[3]));
+    before(() => postReview(review4[0], userIds[3], tokens[3]));
+    before(() => postReview(review4[1], userIds[3], tokens[3]));
+    before(() => postReview(review4[2], userIds[3], tokens[3]));
+    before(() => postReview(review4[3], userIds[3], tokens[3]));
+    before(() => postReview(review4[4], userIds[3], tokens[3]));
+    before(() => postReview(review4[5], userIds[3], tokens[3]));
+    before(() => postReview(review4[6], userIds[3], tokens[3]));
+    before(() => postReview(review4[7], userIds[3], tokens[3]));
+    before(() => postReview(review4[8], userIds[3], tokens[3]));
+    before(() => postReview(review4[9], userIds[3], tokens[3]));
 
-    before(() => postReview(review5[0], userIds[4]));
-    before(() => postReview(review5[1], userIds[4]));
-    before(() => postReview(review5[2], userIds[4]));
-    before(() => postReview(review5[3], userIds[4]));
-    before(() => postReview(review5[4], userIds[4]));
-    before(() => postReview(review5[5], userIds[4]));
-    before(() => postReview(review5[6], userIds[4]));
-    before(() => postReview(review5[7], userIds[4]));
-    before(() => postReview(review5[8], userIds[4]));
-    before(() => postReview(review5[9], userIds[4]));
+    before(() => postReview(review5[0], userIds[4], tokens[4]));
+    before(() => postReview(review5[1], userIds[4], tokens[4]));
+    before(() => postReview(review5[2], userIds[4], tokens[4]));
+    before(() => postReview(review5[3], userIds[4], tokens[4]));
+    before(() => postReview(review5[4], userIds[4], tokens[4]));
+    before(() => postReview(review5[5], userIds[4], tokens[4]));
+    before(() => postReview(review5[6], userIds[4], tokens[4]));
+    before(() => postReview(review5[7], userIds[4], tokens[4]));
+    before(() => postReview(review5[8], userIds[4], tokens[4]));
+    before(() => postReview(review5[9], userIds[4], tokens[4]));
 
-    before(() => postReview(review6[0], userIds[5]));
-    before(() => postReview(review6[1], userIds[5]));
-    before(() => postReview(review6[2], userIds[5]));
-    before(() => postReview(review6[3], userIds[5]));
-    before(() => postReview(review6[4], userIds[5]));
-    before(() => postReview(review6[5], userIds[5]));
-    before(() => postReview(review6[6], userIds[5]));
-    before(() => postReview(review6[7], userIds[5]));
-    before(() => postReview(review6[8], userIds[5]));
-    before(() => postReview(review6[9], userIds[5]));
+    before(() => postReview(review6[0], userIds[5], tokens[5]));
+    before(() => postReview(review6[1], userIds[5], tokens[5]));
+    before(() => postReview(review6[2], userIds[5], tokens[5]));
+    before(() => postReview(review6[3], userIds[5], tokens[5]));
+    before(() => postReview(review6[4], userIds[5], tokens[5]));
+    before(() => postReview(review6[5], userIds[5], tokens[5]));
+    before(() => postReview(review6[6], userIds[5], tokens[5]));
+    before(() => postReview(review6[7], userIds[5], tokens[5]));
+    before(() => postReview(review6[8], userIds[5], tokens[5]));
+    before(() => postReview(review6[9], userIds[5], tokens[5]));
 
-    before(() => postReview(review7[0], userIds[6]));
-    before(() => postReview(review7[1], userIds[6]));
-    before(() => postReview(review7[2], userIds[6]));
-    before(() => postReview(review7[3], userIds[6]));
-    before(() => postReview(review7[4], userIds[6]));
-    before(() => postReview(review7[5], userIds[6]));
+    before(() => postReview(review7[0], userIds[6], tokens[6]));
+    before(() => postReview(review7[1], userIds[6], tokens[6]));
+    before(() => postReview(review7[2], userIds[6], tokens[6]));
+    before(() => postReview(review7[3], userIds[6], tokens[6]));
+    before(() => postReview(review7[4], userIds[6], tokens[6]));
+    before(() => postReview(review7[5], userIds[6], tokens[6]));
 
     it('Avg Ratings by MovieId', () => {
         return request
@@ -173,6 +180,7 @@ describe('Aggregation', () => {
     it('Gets average rating by User', () => {
         return request
             .get(`/api/reviews/user/avg/${userIds[0]}`)
+            .set('Authorization', tokens[0])
             .then(({ body }) => {
                 assert.equal(body.avgRating, 3.0);
             });
@@ -181,6 +189,7 @@ describe('Aggregation', () => {
     it('Response from zero reviews', () => {
         return request
             .get(`/api/reviews/user/avg/${userIds[7]}`)
+            .set('Authorization', tokens[7])
             .then(({ body }) => {
                 assert.deepEqual(body, {});
             });
@@ -205,6 +214,7 @@ describe('Aggregation', () => {
     it('Counts number of reviews by user by category', () => {
         return request
             .get(`/api/reviews/user/count/${userIds[0]}/Sound`)
+            .set('Authorization', tokens[0])
             .then(body => {
                 assert.equal(body.text, 10);
             });
