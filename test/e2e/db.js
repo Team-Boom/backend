@@ -2,7 +2,7 @@ const connect = require('../../lib/connect');
 const mongoose = require('mongoose');
 const request = require('./request');
 
-before(() => connect(process.env.MONGODB_URI));    
+before(() => connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/boommovies'));    
 after(() => mongoose.connection.close());
 
 module.exports = {
