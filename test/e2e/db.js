@@ -1,4 +1,3 @@
-// require('dotenv').config({ path: './test/e2e/.env' });
 const connect = require('../../lib/connect');
 const mongoose = require('mongoose');
 const request = require('./request');
