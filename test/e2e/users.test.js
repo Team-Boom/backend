@@ -61,12 +61,22 @@ describe('User e2e', () => {
             .set('Authorization', token)
             .send(movie)
             .then(checkOk)
-            .then(({ body}) => {
+            .then(({ body }) => {
                 assert.deepEqual(body.watchlist, [movieId]);
             })
             .then(() => Movie.exists({ movieId }))
             .then(exists => {
                 assert.isTrue(exists);
+            });
+    });
+
+    it('Attempts to add same movie to watchlist', () => {
+        return request
+            .post(`/api/users/${_id}/watchlist`)
+            .set('Authorization', token)
+            .send(movie)
+            .then(({ body }) => {
+                assert.equal(body.error, 'Movie Already in Watchlist!');
             });
     });
 
