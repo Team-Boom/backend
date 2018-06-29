@@ -3,7 +3,7 @@ const request = require('./request');
 const { dropCollection } = require('./db');
 const { verify } = require('../../lib/auth/token-service');
 
-describe.only('Reviews e2e', () => {
+describe('Reviews e2e', () => {
 
     let _id = null;
     let _id2 = null;
