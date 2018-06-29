@@ -4,7 +4,7 @@ const { dropCollection } = require('./db');
 const Movie = require('../../lib/models/Movie');
 
 
-describe.only('User e2e', () => {
+describe('User e2e', () => {
 
     before(() => dropCollection('users'));
     before(() => dropCollection('movies'));
