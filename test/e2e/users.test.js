@@ -79,4 +79,21 @@ describe.only('User e2e', () => {
             });
     });
 
+    it('Get without token', () => {
+        return request
+            .get(`/api/users/${_id}/watchlist`)
+            .then(({ body }) => {
+                assert.equal(body.error, 'No Authorization Found');
+            });
+    });
+
+    it('Get with bad id', () => {
+        return request
+            .get(`/api/users/${_id}5/watchlist`)
+            .set('Authorization', token)
+            .then(({ body }) => {
+                assert.equal(body.error, 'Must Be Authorized User');
+            });
+    });
+
 });
