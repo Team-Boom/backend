@@ -20,16 +20,6 @@ describe('Reviews e2e', () => {
         userName: null
     };
 
-    let reviewBack = {
-        movieId: '555534465463',
-        text: 'A great review',
-        category: 'Sound',
-        rating: 3,
-        user: null,
-        title: 'Great Movie',
-        userName: null
-    };
-
     const checkOk = res => {
         if(!res.ok) throw res.error;
         return res;
@@ -49,8 +39,6 @@ describe('Reviews e2e', () => {
                 _id = body._id;
                 review1.user = _id;
                 review1.userName = body.name;
-                reviewBack.user = _id;
-                reviewBack.userName = body.name;
             });
     });
 
@@ -73,7 +61,7 @@ describe('Reviews e2e', () => {
             .send(review1)
             .then(checkOk)
             .then(({ body }) => {
-                assert.deepEqual(body, {...reviewBack, __v: 0, _id: body._id });
+                assert.deepEqual(body, {...review1, __v: 0, _id: body._id });
                 reviewId = body._id;
             });
     });
@@ -91,7 +79,7 @@ describe('Reviews e2e', () => {
         return request
             .get(`/api/reviews/user/${_id}`)
             .then(({ body }) => {
-                assert.deepEqual(body[0], { ...reviewBack, __v: 0, _id: reviewId });
+                assert.deepEqual(body[0], { ...review1, __v: 0, _id: reviewId });
             });
     });
 
@@ -112,13 +100,13 @@ describe('Reviews e2e', () => {
     });
 
     it('Updates a Review', () => {
-        reviewBack.text = 'A even greater review';
+        review1.text = 'A even greater review';
         return request
             .put(`/api/reviews/user/${reviewId}`)
-            .send(reviewBack)
+            .send(review1)
             .then(checkOk)
             .then(({ body }) => {
-                assert.deepEqual(body, {...reviewBack, __v: 0, _id: reviewId });
+                assert.deepEqual(body, {...review1, __v: 0, _id: reviewId });
             });
     });
 
@@ -126,7 +114,7 @@ describe('Reviews e2e', () => {
         return request
             .get(`/api/reviews/detail/${reviewId}`)
             .then(({ body }) => {
-                assert.deepEqual(body, {...reviewBack, __v: 0, _id: reviewId });
+                assert.deepEqual(body, {...review1, __v: 0, _id: reviewId });
             });
     });
 
