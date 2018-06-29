@@ -73,7 +73,7 @@ describe('User e2e', () => {
             });
     });
 
-    it('Attempts to add same movie to watchlist', () => {
+    it('Attempts to add same movie to watchlist, returns same user info for frontend', () => {
         return request
             .post(`/api/users/${_id}/watchlist`)
             .set('Authorization', token)
