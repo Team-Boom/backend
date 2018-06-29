@@ -4,7 +4,7 @@ const { dropCollection } = require('./db');
 const Movie = require('../../lib/models/Movie');
 const { verify } = require('../../lib/auth/token-service');
 
-describe.only('User e2e', () => {
+describe('User e2e', () => {
 
     before(() => dropCollection('users'));
     before(() => dropCollection('movies'));
