@@ -1,7 +1,6 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
-const Movie = require('../../lib/models/Movie');
 const { verify } = require('../../lib/auth/token-service');
 
 describe('User e2e', () => {
@@ -66,10 +65,6 @@ describe('User e2e', () => {
             .then(({ body }) => {
                 user = body;
                 assert.deepEqual(body.watchlist, [movieId]);
-            })
-            .then(() => Movie.exists({ movieId }))
-            .then(exists => {
-                assert.isTrue(exists);
             });
     });
 
