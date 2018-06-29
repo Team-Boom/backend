@@ -39,8 +39,6 @@ describe('Reviews e2e', () => {
                 _id = body._id;
                 review1.user = _id;
                 review1.userName = body.name;
-                // reviewBack.user = _id;
-                // reviewBack.userName = body.name;
             });
     });
 
