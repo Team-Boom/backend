@@ -1,5 +1,7 @@
 # Deep Focus Movie Reviews
 
+// initial commit
+
 https://deepfocus.herokuapp.com
 
 The purpose of the application is to allow the users to share technical reviews of movies and film. They can search for a specific work and submit reviews under subcategories that include the technical aspects of a film (lighting, sound design, etc.).
