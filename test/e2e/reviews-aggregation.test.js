@@ -57,6 +57,17 @@ describe('Aggregation', () => {
             .then(() => {return null;});
     };
 
+    // Make this programmatic!
+    // export an array of users with reviews (or key them together), then do something like:
+    users.map(user => before(() => {
+        postUser(user)
+            .then(({ token, id }) => {
+                return Promise.all(user.reviews.map(review => {
+                    return postReview(review, id, token);
+                }));
+            });
+    }));
+
     before(() => postUser(user1));
     before(() => postUser(user2));
     before(() => postUser(user3));
